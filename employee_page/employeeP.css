@@ -1,0 +1,10 @@
+body {
+    background-color: bisque;
+    padding: 10px;
+}
+.table-header {
+    background-color: rgba(248, 185, 107, 0.973)
+}
+.navbar {
+    background-color: rgb(248, 192, 124);
+}

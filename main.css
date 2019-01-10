@@ -1,0 +1,11 @@
+body {
+    background-color: bisque;
+    height: 1006px;
+    padding: 10px;
+}
+.container {
+    background-color: #D4AF37;
+}
+.navbar {
+    background-color: rgb(248, 192, 124);
+}
