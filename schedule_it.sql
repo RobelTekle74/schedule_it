@@ -20,86 +20,11 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: employee_table; Type: TABLE; Schema: public; Owner: ashleysouvannaraj
---
-
-CREATE TABLE public.employee_table (
-    id integer NOT NULL,
-    name character varying,
-    email character varying,
-    password character varying,
-    phone integer,
-    owner_id integer
-);
-
-
-ALTER TABLE public.employee_table OWNER TO ashleysouvannaraj;
-
---
--- Name: employee_table_id_seq; Type: SEQUENCE; Schema: public; Owner: ashleysouvannaraj
---
-
-CREATE SEQUENCE public.employee_table_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.employee_table_id_seq OWNER TO ashleysouvannaraj;
-
---
--- Name: employee_table_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ashleysouvannaraj
---
-
-ALTER SEQUENCE public.employee_table_id_seq OWNED BY public.employee_table.id;
-
-
---
--- Name: owner; Type: TABLE; Schema: public; Owner: ashleysouvannaraj
---
-
-CREATE TABLE public.owner (
-    id integer NOT NULL,
-    name character varying,
-    email character varying,
-    password character varying,
-    phone integer
-);
-
-
-ALTER TABLE public.owner OWNER TO ashleysouvannaraj;
-
---
--- Name: owner_id_seq; Type: SEQUENCE; Schema: public; Owner: ashleysouvannaraj
---
-
-CREATE SEQUENCE public.owner_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.owner_id_seq OWNER TO ashleysouvannaraj;
-
---
--- Name: owner_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ashleysouvannaraj
---
-
-ALTER SEQUENCE public.owner_id_seq OWNED BY public.owner.id;
-
-
---
 -- Name: schedule; Type: TABLE; Schema: public; Owner: ashleysouvannaraj
 --
 
 CREATE TABLE public.schedule (
-    employee_id integer,
+    id integer,
     monday time without time zone,
     tuesday time without time zone,
     wednesday time without time zone,
@@ -113,87 +38,150 @@ CREATE TABLE public.schedule (
 ALTER TABLE public.schedule OWNER TO ashleysouvannaraj;
 
 --
--- Name: employee_table id; Type: DEFAULT; Schema: public; Owner: ashleysouvannaraj
+-- Name: user_id; Type: SEQUENCE; Schema: public; Owner: ashleysouvannaraj
 --
 
-ALTER TABLE ONLY public.employee_table ALTER COLUMN id SET DEFAULT nextval('public.employee_table_id_seq'::regclass);
+CREATE SEQUENCE public.user_id
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_id OWNER TO ashleysouvannaraj;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: ashleysouvannaraj
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    role character varying,
+    name character varying,
+    email character varying,
+    password character varying,
+    phone integer
+);
+
+
+ALTER TABLE public.users OWNER TO ashleysouvannaraj;
+
+--
+-- Name: users_id; Type: SEQUENCE; Schema: public; Owner: ashleysouvannaraj
+--
+
+CREATE SEQUENCE public.users_id
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id OWNER TO ashleysouvannaraj;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: ashleysouvannaraj
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO ashleysouvannaraj;
+
+--
+-- Name: users_id_seq1; Type: SEQUENCE; Schema: public; Owner: ashleysouvannaraj
+--
+
+CREATE SEQUENCE public.users_id_seq1
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq1 OWNER TO ashleysouvannaraj;
+
+--
+-- Name: users_id_seq1; Type: SEQUENCE OWNED BY; Schema: public; Owner: ashleysouvannaraj
+--
+
+ALTER SEQUENCE public.users_id_seq1 OWNED BY public.users.id;
 
 
 --
--- Name: owner id; Type: DEFAULT; Schema: public; Owner: ashleysouvannaraj
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: ashleysouvannaraj
 --
 
-ALTER TABLE ONLY public.owner ALTER COLUMN id SET DEFAULT nextval('public.owner_id_seq'::regclass);
-
-
---
--- Data for Name: employee_table; Type: TABLE DATA; Schema: public; Owner: ashleysouvannaraj
---
-
-COPY public.employee_table (id, name, email, password, phone, owner_id) FROM stdin;
-\.
-
-
---
--- Data for Name: owner; Type: TABLE DATA; Schema: public; Owner: ashleysouvannaraj
---
-
-COPY public.owner (id, name, email, password, phone) FROM stdin;
-\.
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq1'::regclass);
 
 
 --
 -- Data for Name: schedule; Type: TABLE DATA; Schema: public; Owner: ashleysouvannaraj
 --
 
-COPY public.schedule (employee_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday) FROM stdin;
+COPY public.schedule (id, monday, tuesday, wednesday, thursday, friday, saturday, sunday) FROM stdin;
 \.
 
 
 --
--- Name: employee_table_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ashleysouvannaraj
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: ashleysouvannaraj
 --
 
-SELECT pg_catalog.setval('public.employee_table_id_seq', 1, false);
-
-
---
--- Name: owner_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ashleysouvannaraj
---
-
-SELECT pg_catalog.setval('public.owner_id_seq', 1, false);
+COPY public.users (id, role, name, email, password, phone) FROM stdin;
+\.
 
 
 --
--- Name: employee_table employee_table_pkey; Type: CONSTRAINT; Schema: public; Owner: ashleysouvannaraj
+-- Name: user_id; Type: SEQUENCE SET; Schema: public; Owner: ashleysouvannaraj
 --
 
-ALTER TABLE ONLY public.employee_table
-    ADD CONSTRAINT employee_table_pkey PRIMARY KEY (id);
-
-
---
--- Name: owner owner_pkey; Type: CONSTRAINT; Schema: public; Owner: ashleysouvannaraj
---
-
-ALTER TABLE ONLY public.owner
-    ADD CONSTRAINT owner_pkey PRIMARY KEY (id);
+SELECT pg_catalog.setval('public.user_id', 1, false);
 
 
 --
--- Name: employee_table employee_table_owner_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ashleysouvannaraj
+-- Name: users_id; Type: SEQUENCE SET; Schema: public; Owner: ashleysouvannaraj
 --
 
-ALTER TABLE ONLY public.employee_table
-    ADD CONSTRAINT employee_table_owner_id_fkey FOREIGN KEY (owner_id) REFERENCES public.owner(id);
+SELECT pg_catalog.setval('public.users_id', 1, false);
 
 
 --
--- Name: schedule schedule_employee_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ashleysouvannaraj
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ashleysouvannaraj
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 1, false);
+
+
+--
+-- Name: users_id_seq1; Type: SEQUENCE SET; Schema: public; Owner: ashleysouvannaraj
+--
+
+SELECT pg_catalog.setval('public.users_id_seq1', 1, false);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: ashleysouvannaraj
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schedule schedule_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ashleysouvannaraj
 --
 
 ALTER TABLE ONLY public.schedule
-    ADD CONSTRAINT schedule_employee_id_fkey FOREIGN KEY (employee_id) REFERENCES public.employee_table(id);
+    ADD CONSTRAINT schedule_id_fkey FOREIGN KEY (id) REFERENCES public.users(id);
 
 
 --

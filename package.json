@@ -5,10 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "bcrypt": "^3.0.3",
-<<<<<<< HEAD
     "body-parser": "^1.18.3",
-=======
->>>>>>> 9670187481de1821fb1a474c7ee55f4b77ae24d4
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "passport": "^0.4.0",
