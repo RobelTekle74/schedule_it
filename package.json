@@ -4,6 +4,8 @@
   "description": "back-end-project",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^3.0.3",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "sequelize": "^4.42.0"
   },
