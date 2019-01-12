@@ -11,6 +11,10 @@ const path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//bcrypt
+const bcrypt = require('bcrypt');
+
+//passport
 
 //This is for testing locally
 function run() {
