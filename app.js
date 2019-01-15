@@ -16,7 +16,7 @@ const bcrypt = require('bcrypt');
 
 app.post('/auth/ownerRegister', function(req, res, next) {
     var hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    db.query(`INSERT INTO user (email, password, *) VALUES ('${req.body.email}, '${hashedPassword}', '*')`);
+    db.query(`INSERT INTO user (email, password, *) VALUES ('${req.body.email}', '${hashedPassword}', '*')`);
 });
 
 
@@ -62,11 +62,7 @@ passport.deserializeUser(function(cookie, done) {
     });
 });
 
-app.get('/login', function(req, res) {
-    res.render('login');
-})
-
-app.post('/login', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
+app.get('/', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
     if(result.role = 'owner') {
         res.redirect('/ownerDashboard');
     } else {
