@@ -20,7 +20,7 @@ app.post('/owner_page/createEmployeeAcct.html', function(req, res, next) {
 });
 
 
-//passport and login paths
+//passport
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
@@ -62,20 +62,39 @@ passport.deserializeUser(function(cookie, done) {
     });
 });
 
+//sequelize
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('database', 'username', 'password', {
+    host: 'localhost',
+    dialect: 'mysql'|'sqlite'|'postgres'|'mssql',
+    operatorsAliases: false,
+
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    },
+
+});
+
 
 //page routes
 app.get('/', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
     if(result.role = 'owner') {
-        res.redirect('/ownerDashboard');
+        res.redirect('/owner_page/ownerDashboard.html');
     } else {
         res.redirect('/employeeDashboard');
     }
 })
+
 app.get('/owner_page/ownerDashboard.html', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
     res.render('/owner_page/ownerDashboard.html');
 });
 
-
+app.get('/owner_page/ownerDashboard.html', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
+    res.render('/owner_page/ownerDashboard.html');
+});
 
 
 
