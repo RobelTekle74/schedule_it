@@ -8,6 +8,9 @@ body {
 .table-header {
     background-color: rgb(248, 192, 124);
 }
+    #week {
+        background-color: rgb(248, 192, 124);
+    }
 .navbar {
     background-color: rgb(248, 192, 124);
 }
