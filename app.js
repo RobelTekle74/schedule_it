@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 //bcrypt
 const bcrypt = require('bcrypt');
 
-app.post('/auth/ownerRegister', function(req, res, next) {
+app.post('/owner_page/createEmployeeAcct.html', function(req, res, next) {
     var hashedPassword = bcrypt.hashSync(req.body.password, 10);
     db.query(`INSERT INTO user (email, password, *) VALUES ('${req.body.email}', '${hashedPassword}', '*')`);
 });
@@ -62,6 +62,8 @@ passport.deserializeUser(function(cookie, done) {
     });
 });
 
+
+//page routes
 app.get('/', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
     if(result.role = 'owner') {
         res.redirect('/ownerDashboard');
@@ -69,13 +71,8 @@ app.get('/', passport.authenticate('local', { failureRedirect: '/'}), function(r
         res.redirect('/employeeDashboard');
     }
 })
-
-
-
-//page routes
-
-app.get('/owner_page/createEmployeeAcct', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
-    res.render('/owner_page/createEmployeeAcct')
+app.get('/owner_page/ownerDashboard.html', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
+    res.render('/owner_page/ownerDashboard.html');
 });
 
 
