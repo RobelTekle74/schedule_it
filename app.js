@@ -19,6 +19,9 @@ app.set('view engine', 'ejs');
 //     db.query(`INSERT INTO user (email, password, *) VALUES ('${req.body.email}', '${hashedPassword}', '*')`);
 // });
 
+app.get('/home', function (req, res) {
+    res.render('home');
+})
 
 //passport
 const passport = require('passport');
@@ -72,15 +75,17 @@ app.get('/', passport.authenticate('local', { failureRedirect: '/'}), function(r
     }
 })
 
-app.get('/owner_page/ownerDashboard.html', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
-    res.render('/owner_page/ownerDashboard.html');
+app.get('/owner', function(req, res) {
+    
+    res.render('oDash');
+
 });
 
 app.get('/employee_page/employeeP.html', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
     res.render('/employee_page/employeeP.html');
 });
 
-
+// passport.authenticate('local', { failureRedirect: '/'}),
 
 //This is for testing locally
 function run() {
