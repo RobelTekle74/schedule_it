@@ -23,7 +23,7 @@ app.get('/home', function (req, res) {
     res.render('home');
 })
 
-//passport and login paths
+//passport
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
@@ -69,17 +69,21 @@ passport.deserializeUser(function(cookie, done) {
 //page routes
 app.get('/', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
     if(result.role = 'owner') {
-        res.redirect('/ownerDashboard');
+        res.redirect('/owner_page/ownerDashboard.html');
     } else {
-        res.redirect('/employeeDashboard');
+        res.redirect('/employee_page/employeeP.html');
     }
 })
+
 app.get('/owner', function(req, res) {
-    console.log(`${req.method}`)
+    
     res.render('oDash');
+
 });
 
-
+app.get('/employee_page/employeeP.html', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
+    res.render('/employee_page/employeeP.html');
+});
 
 // passport.authenticate('local', { failureRedirect: '/'}),
 
