@@ -34,5 +34,8 @@
   "bugs": {
     "url": "https://github.com/ashleysouvannaraj/schedule_it/issues"
   },
+  "engines": {
+    "node": "8.12.0"
+  },
   "homepage": "https://github.com/ashleysouvannaraj/schedule_it#readme"
 }
