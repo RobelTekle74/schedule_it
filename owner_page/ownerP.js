@@ -2,9 +2,9 @@
 const axios = require('axios');
 const ejs = require('ejs');
 
-axios.get('all employee names and roles from database.') //#endregion
+axios.get(db.data) //#endregion
     .then(function (response) {
-        document.getElementById("cell2").innerHTML = response;
+        document.getElementById("cell2").innerHTML = response.data.name;
     })
 
 // To post all information created for employee to the data base.

@@ -12,13 +12,16 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 //bcrypt
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
-app.post('/owner_page/createEmployeeAcct.html', function(req, res, next) {
-    var hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    db.query(`INSERT INTO user (email, password, *) VALUES ('${req.body.email}', '${hashedPassword}', '*')`);
-});
+// app.post('/owner_page/createEmployeeAcct.html', function(req, res, next) {
+//     var hashedPassword = bcrypt.hashSync(req.body.password, 10);
+//     db.query(`INSERT INTO user (email, password, *) VALUES ('${req.body.email}', '${hashedPassword}', '*')`);
+// });
 
+app.get('/home', function (req, res) {
+    res.render('home');
+})
 
 //passport and login paths
 const passport = require('passport');
@@ -71,13 +74,14 @@ app.get('/', passport.authenticate('local', { failureRedirect: '/'}), function(r
         res.redirect('/employeeDashboard');
     }
 })
-app.get('/owner_page/ownerDashboard.html', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
-    res.render('/owner_page/ownerDashboard.html');
+app.get('/owner', function(req, res) {
+    console.log(`${req.method}`)
+    res.render('oDash');
 });
 
 
 
-
+// passport.authenticate('local', { failureRedirect: '/'}),
 
 //This is for testing locally
 function run() {

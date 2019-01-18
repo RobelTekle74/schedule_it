@@ -45,13 +45,12 @@
 
                 <thead>
                 
-                    <tr class="table-header d-flex align-content-center">
+                    <!-- <tr class="table-header d-flex align-content-center">
                         <input type="text" class="form-control text-center" id="scheduleHeader" placeholder="Week(start date- end date)">
-                    </tr>
+                    </tr> -->
                 
                     <tr class="table-header">
-                        <th scope="col" id="head1">Role</th>
-                        <th scope="col" id="head2">Name</th>
+                        <th scope="col" id="head2">Employee Id</th>
                         <th scope="col" id="head3">Monday</th>
                         <th scope="col" id="head4">Tuesday</th>
                         <th scope="col" id="head5">Wednsday</th>
@@ -64,42 +63,48 @@
                 <tbody>
                     <tr>
                         <th scope="row"><input type="text" class="form-control" id="cell1" placeholder="Employee #"></th>
-                        <td><input type="text" class="form-control text-nowrap" id="cell2" placeholder="Employee Name"></td>
-                        <td><input type="text" class="form-control text-wrap" id="cell3" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control text-wrap" id="cell4" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control text-wrap" id="cell5" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control text-wrap" id="cell6" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control text-wrap" id="cell7" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control text-wrap" id="cell8" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control text-wrap" id="cell9" placeholder="Employee #"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><input type="text" class="form-control" placeholder="Employee #"></th>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><input type="text" class="form-control" placeholder="Employee #"></th>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
-                        <td><input type="text" class="form-control" placeholder="Employee #"></td>
+                        <td><input type="text" class="form-control text-wrap" id="cell2" placeholder="Time"></td>
+                        <td><input type="text" class="form-control text-wrap" id="cell3" placeholder="Time"></td>
+                        <td><input type="text" class="form-control text-wrap" id="cell4" placeholder="Time"></td>
+                        <td><input type="text" class="form-control text-wrap" id="cell5" placeholder="Time"></td>
+                        <td><input type="text" class="form-control text-wrap" id="cell6" placeholder="Time"></td>
+                        <td><input type="text" class="form-control text-wrap" id="cell7" placeholder="Time"></td>
+                        <td><input type="text" class="form-control text-wrap" id="cell8" placeholder="Time"></td>
                     </tr>
                 </tbody>
             </table>
             <div class="table-responsive p-5 d-flex justify-content-center">
                 <button class="btn btn-success">Submit</button>
             </div>
+        </div>
+        <div>
+            <%- include('header'); -%>
+            <thead>
+                <tr class="table-header">
+                    <th scope="col" id="head2">Employee Id</th>
+                    <th scope="col" id="head3">Monday</th>
+                    <th scope="col" id="head4">Tuesday</th>
+                    <th scope="col" id="head5">Wednsday</th>
+                    <th scope="col" id="head6">Thursday</th>
+                    <th scope="col" id="head7">Friday</th>
+                    <th scope="col" id="head8">Saturday</th>
+                    <th scope="col" id="head9">Sunday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <%- include('footer'); -%>
         </div>
 
     </div>
