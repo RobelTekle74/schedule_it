@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const app = express();
 
 //We need this to go back and forth from the website, I think
@@ -21,69 +22,77 @@ app.set('view engine', 'ejs');
 
 app.get('/home', function (req, res) {
     res.render('home');
-})
+});
+
+app.get('/owner', function(req, res) {  
+    res.render('oDash');
+});
+
+app.get('/employee', function (req, res) {
+    res.render('eDash');
+});
+
+// function oDash() {
+//     location.href = "./oDash.ejs";
+// };
+// function eDash() {
+//     location.href = "./eDash.ejs";
+// };
 
 //passport
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const session = require('express-session');
+// const passport = require('passport');
+// const LocalStrategy = require('passport-local').Strategy;
+// const session = require('express-session');
 
-app.use(session({secret: 'robeltakesgirlbaths'}));
+// app.use(session({secret: 'robeltakesgirlbaths'}));
 
-passport.use(new LocalStrategy({usernameField: 'email'}, function(email, password, done) {
-    db.one(`SELECT * FROM user WHERE email = '${email}'`)
-        .then(function(result) {
+// passport.use(new LocalStrategy({usernameField: 'email'}, function(email, password, done) {
+//     db.one(`SELECT * FROM user WHERE email = '${email}'`)
+//         .then(function(result) {
 
-            let fetchedPassword = result.password;
-            let isPasswordMatch = bcrypt.compareSync(password, fetchedPassword);
+//             let fetchedPassword = result.password;
+//             let isPasswordMatch = bcrypt.compareSync(password, fetchedPassword);
 
-            if(isPasswordMatch) {
-                done(null, result);
-            } else {
-                done(null, false)
-            };
-        }).catch(function(err){
-                done(null, false);
-        });
-}));
-
-
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser(function(user, done) {
-    done(null, {
-        id: user.id,
-        email: user.email
-    });
-});
-
-passport.deserializeUser(function(cookie, done) {
-    db.query(`SELECT * FROM user WHERE id = '${cookie.id}'`).then(function(user) {
-        done(null, user);
-    });
-});
+//             if(isPasswordMatch) {
+//                 done(null, result);
+//             } else {
+//                 done(null, false)
+//             };
+//         }).catch(function(err){
+//                 done(null, false);
+//         });
+// }));
 
 
-//page routes
-app.get('/', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
-    if(result.role = 'owner') {
-        res.redirect('/owner_page/ownerDashboard.html');
-    } else {
-        res.redirect('/employee_page/employeeP.html');
-    }
-})
 
-app.get('/owner', function(req, res) {
-    
-    res.render('oDash');
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-});
+// passport.serializeUser(function(user, done) {
+//     done(null, {
+//         id: user.id,
+//         email: user.email
+//     });
+// });
 
-app.get('/employee_page/employeeP.html', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
-    res.render('/employee_page/employeeP.html');
-});
+// passport.deserializeUser(function(cookie, done) {
+//     db.query(`SELECT * FROM user WHERE id = '${cookie.id}'`).then(function(user) {
+//         done(null, user);
+//     });
+// });
+
+
+// //page routes
+// app.get('/', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
+//     if(result.role = 'owner') {
+//         res.redirect('/owner_page/ownerDashboard.html');
+//     } else {
+//         res.redirect('/employee_page/employeeP.html');
+//     }
+// })
+
+
+
 
 // passport.authenticate('local', { failureRedirect: '/'}),
 

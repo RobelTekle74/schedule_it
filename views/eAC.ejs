@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <% include Templates/header.ejs %>
+</head>
+<body>
+    <div class="container">
+
+        <nav class="navbar navbar-expand-lg sticky-top navbar-light">
+            <a class="navbar-brand" href="home.ejs">Schedule It</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.ejs">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Owner Dashboard
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="genS.ejs">Generate Schedule</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="oDash.ejs">Dashboard</a>
+                        </div>
+                    </li>
+                    <li>
+                        <button><a class="nav-link" href="../index.html">Sign Out</a></button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class=" mx-auto p-5" id="CEAInput">
+            <input type="text" class="form-control text-center" id="role" placeholder="Role">
+            <input type="text" class="form-control text-center" id="name" placeholder="Employee Full Name">
+            <input type="text" class="form-control text-center" id="emall" placeholder="Employee Email">
+            <input type="text" class="form-control text-center" id="passWord" placeholder="Password">
+            <input type="text" class="form-control text-center" id="phoneNumber" placeholder="Phone Number">
+            <div class="input-group-prepend d-flex justify-content-end" id="button-addon3">
+                <button class="btn btn-success" id="submit" >Add</button>
+            </div>
+        </div>
+
+    </div>
+    
+    
+    <% include Templates/footer.ejs %>
+    
+</body>
+</html>
