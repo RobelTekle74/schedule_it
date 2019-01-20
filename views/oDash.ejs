@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <% include Templates/header.ejs %>
+    <% include Templates/header.ejs %>
 </head>
 <body>
     <div class="container">
 
         <nav class="navbar navbar-expand-lg sticky-top navbar-light">
-            <a class="navbar-brand" href="home.ejs">Schedule It</a>
+            <a class="navbar-brand" href="/home">Schedule It</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -21,26 +21,26 @@
                             Owner Dashboard <span class="sr-only">(current)</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="genS.ejs">Generate Schedule</a>
+                            <a class="dropdown-item" href="/generateSchedule">Generate Schedule</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="eAC.ejs">Create Employee Account</a>
+                            <a class="dropdown-item" href="/createAccount">Create Employee Account</a>
                         </div>
                     </li>
                     <li>
-                        <button class="btn btn-outline-success btn-sm p-0"><a class="nav-link text-success" href="home.ejs">Sign Out</a></button>
+                        <button class="btn btn-outline-success btn-sm p-0"><a class="nav-link text-success" href="/home">Sign Out</a></button>
                     </li>
                     
                 </ul>
             </div>
         </nav>
 
-        <div id="ownerInfo">
-            <h1 class="d-flex justify-content-center"> Owner Name </h1>
-            <h2 class="d-flex justify-content-center"> Owner Info </h2>
+        <div>
+            <% include Templates/uInfo.ejs %>
         </div>
+
         <div class="d-flex justify-content-center">
-            <a class="btn btn-secondary m-4" href="genS.ejs"> Generate Schedule</a>
-            <a class="btn btn-success m-4" href="eAC.ejs"> Create Employee Account</a>
+            <a class="btn btn-secondary m-4" href="/generateSchedule"> Generate Schedule</a>
+            <a class="btn btn-success m-4" href="/createAccount"> Create Employee Account</a>
         </div>
 
     </div>

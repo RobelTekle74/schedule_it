@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <% include Templates/header.ejs %>
+    <% include Templates/header.ejs %>
 </head>
 <body>
     <div class="container">
 
         <nav class="navbar navbar-expand-lg sticky-top navbar-light">
-            <a class="navbar-brand" href="home.ejs">Schedule It</a>
+            <a class="navbar-brand" href="/home">Schedule It</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="home.ejs">Home</a>
+                    <a class="nav-link" href="/home">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="eDash.ejs">Employee <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/eDash">Employee <span class="sr-only">(current)</span></a>
                 </li>
                 <li>
-                        <button class="btn btn-outline-success btn-sm p-0"><a class="nav-link text-success" href="home.ejs">Sign Out</a></button>
+                    <button class="btn btn-outline-success btn-sm p-0"><a class="nav-link text-success" href="/home">Sign Out</a></button>
                 </li>
                 </ul>
             </div>
         </nav>
+
+        <div>
+            <% include Templates/uInfo.ejs %>
+        </div>
             
         <div class="table-responsive pt-5">
             <table class="table table-striped">

@@ -31,6 +31,12 @@ app.get('/owner', function(req, res) {
 app.get('/employee', function (req, res) {
     res.render('eDash');
 });
+app.get('/generateSchedule', function (req, res) {
+    res.render('genS');
+});
+app.get('/createAccount', function (req, res) {
+    res.render('eAC');
+});
 
 // function oDash() {
 //     location.href = "./oDash.ejs";
