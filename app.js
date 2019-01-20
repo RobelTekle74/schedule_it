@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const app = express();
 const router = express.Router();
 const path = require('path');
@@ -17,21 +18,30 @@ router.get('/employee', function(req, res) {
     res.render('employee')
 });
 
+app.get('/home', function (req, res) {
+    res.render('home');
+});
 
+app.get('/owner', function(req, res) {  
+    res.render('oDash');
+});
 
+app.get('/employee', function (req, res) {
+    res.render('eDash');
+});
+app.get('/generateSchedule', function (req, res) {
+    res.render('genS');
+});
+app.get('/createAccount', function (req, res) {
+    res.render('eAC');
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
+// function oDash() {
+//     location.href = "./oDash.ejs";
+// };
+// function eDash() {
+//     location.href = "./eDash.ejs";
+// };
 
 
 //passport
@@ -87,6 +97,8 @@ router.get('/employee', function(req, res) {
 // })
 
 
+
+// passport.authenticate('local', { failureRedirect: '/'}),
 
 //This is for testing locally
 function run() {
