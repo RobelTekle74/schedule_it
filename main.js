@@ -19,21 +19,21 @@ app.post('/createEmployeeAcct.html', function(req,res,next) {
 })
 })
 
+
 app.post('/generateSchedule.html', function (req,res,next) {
 
-  models.schedule.create({id: `${req.body.cell1}`, monday: `${req.body.cell2}`, tuesday: `${req.body.cell3}`, wednesday: `${req.body.cell4}`, thursday: `${req.body.cell5}`, friday: `${req.body.cell6}`, saturday: `${req.body.cell7}`, sunday: `${req.body.cell8}`});
+  models.schedule.create({id: `${req.body.cell1}`, monday: `${req.body.cell2}`, tuesday: `${req.body.cell3}`, wednesday: `${req.body.cell4}`, thursday: `${req.body.cell5}`, friday: `${req.body.cell6}`, saturday: `${req.body.cell7}`, sunday: `${req.body.cell8}`})
+  .then(function (schedule) {
 
-  res.send(models.schedule.findAll())
+  })
+})
+
+app.get('/generateSchedule.html', function(req, res, next) {
+  models.schedule.findAll().then(function() {
+    
+  })
 })
 
 
-// models.user.findAll({where: {name: ''}})
-//   .then((results) => {
-//     results.forEach(function(index){
-//             console.log(index.id);
-//         })
-//   });
 
-
-
-// app.listen(3000);
+app.listen(3000);
