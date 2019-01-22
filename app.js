@@ -21,7 +21,23 @@ app.set('view engine', 'ejs');
 
 app.get('/home', function (req, res) {
     res.render('home');
-})
+});
+
+app.get('/owner', function(req, res) {  
+    res.render('oDash');
+});
+
+app.get('/employee', function (req, res) {
+    res.render('eDash');
+});
+app.get('/generateSchedule', function (req, res) {
+    res.render('genS');
+});
+app.get('/createAccount', function (req, res) {
+    res.render('eAC');
+});
+
+
 
 //passport
 const passport = require('passport');
@@ -66,26 +82,35 @@ passport.deserializeUser(function(cookie, done) {
 });
 
 
-//page routes
-app.get('/', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
-    if(result.role = 'owner') {
-        res.redirect('/owner_page/ownerDashboard.html');
-    } else {
-        res.redirect('/employee_page/employeeP.html');
-    }
-})
+// //page routes
+// app.get('/', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
+//     if(result.role = 'owner') {
+//         res.redirect('/owner_page/ownerDashboard.html');
+//     } else {
+//         res.redirect('/employee_page/employeeP.html');
+//     }
+// })
 
-app.get('/owner', function(req, res) {
-    
+app.get('/home', function (req, res) {
+    res.render('home');
+});
+
+app.get('/owner', passport.authenticate('local', { failureRedirect: '/home'}), function(req, res) {  
     res.render('oDash');
-
 });
 
-app.get('/employee_page/employeeP.html', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
-    res.render('/employee_page/employeeP.html');
+app.get('/employee', passport.authenticate('local', { failureRedirect: '/home'}), function (req, res) {
+    res.render('eDash');
+});
+app.get('/generateSchedule', function (req, res) {
+    res.render('genS');
+});
+app.get('/createAccount', function (req, res) {
+    res.render('eAC');
 });
 
-// passport.authenticate('local', { failureRedirect: '/'}),
+
+
 
 //This is for testing locally
 function run() {
