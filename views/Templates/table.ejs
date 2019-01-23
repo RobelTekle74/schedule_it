@@ -1,6 +1,5 @@
 <div class="table-responsive pt-5">
-    <table class="table table-striped">
-        <thead>
+        <table>
             <tr class="table-header">
                 <th scope="col">Employee #</th>
                 <th scope="col">Name</th>
@@ -12,19 +11,17 @@
                 <th scope="col">Saturday</th>
                 <th scope="col">Sunday</th>
             </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row"><%=schedule.id%></th>
-                <td><%=schedule.monday%></td>
-                <td><%=schedule.tuesday%></td>
-                <td><%=schedule.wednesday%></td>
-                <td><%=schedule.thursday%></td>
-                <td><%=schedule.friday%></td>
-                <td><%=schedule.saturday%></td>
-                <td><%=schedule.sunday%></td>
-            </tr>
-        
-        </tbody>
-    </table>
+            
+            <% for (var i = 0; i < schedule.length; i++) { %>
+                <tr>
+                    <td><%= schedule[i].Monday %></td>
+                    <td><%= schedule[i].Tuesday %></td>
+                    <td><%= schedule[i].Wednsday %></td>
+                    <td><%= schedule[i].Thursday %></td>
+                    <td><%= schedule[i].Friday %></td>
+                    <td><%= schedule[i].Saturday %></td>
+                    <td><%= schedule[i].Sunday %></td>
+                </tr>    
+            <% } %>
+        </table>
 </div>
