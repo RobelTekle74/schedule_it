@@ -86,7 +86,7 @@ passport.deserializeUser(function(cookie, done) {
 
 
 //sign in routes
-app.get('/signIn', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
+app.get('/signIn', passport.authenticate('local', { failureRedirect: '/home'}), function(req, res) {
     if(result.role = 'owner') {
         res.redirect('/owner');
     } else {
@@ -98,16 +98,14 @@ app.get('/home', function (req, res) {
     res.render('home');
 });
 
-app.get('/owner', /* passport.authenticate('local', { failureRedirect: '/home'}), */ function(req, res) {  
+app.get('/owner', passport.authenticate('local', { failureRedirect: '/home'}), function(req, res) {  
     res.render('oDash');
 });
 
 app.get('/employee', passport.authenticate('local', { failureRedirect: '/home'}), function (req, res) {
     res.render('eDash');
 });
-// app.get('/generateSchedule', function (req, res) {
-//     res.render('genS');
-// });
+
 app.get('/createAccount', function (req, res) {
     res.render('eAC');
 });
@@ -115,10 +113,10 @@ app.get('/createAccount', function (req, res) {
 app.post('/createEmployeeAcct', function(req,res,next) {
     console.log(req.body)
     var hashedPassword = bcrypt.hashSync(req.body.password, 10);
-  
-    models.user.create({role: "employee", name: `${req.body.name}`, email: `${req.body.email}`, password: `${hashedPassword}`, phone: `${req.body.phone}`})
+    
+    models.user.create({role: `${req.body.role}`, name: `${req.body.name}`, email: `${req.body.email}`, password: hashedPassword, phone: `${req.body.phone}`})
       .then(function (user) {
-      console.log(user);
+        res.redirect('/createAccount')
   }).catch(e => {
     console.log(e)
   })
