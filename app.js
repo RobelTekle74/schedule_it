@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const schedule = require('db.schedule_it');
+
 
 app.use(express.static(__dirname + '/public'));
 
@@ -20,7 +22,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 
-app.use(session({secret: 'robeltakesgirlbaths'}));
+app.use(session({secret: 'schedule-it'}));
 
 passport.use(new LocalStrategy({usernameField: 'email'}, function(email, password, done) {
     db.one(`SELECT * FROM user WHERE email = '${email}'`)
@@ -79,7 +81,7 @@ app.get('/employee', passport.authenticate('local', { failureRedirect: '/home'})
     res.render('eDash');
 });
 app.get('/generateSchedule', function (req, res) {
-    res.render('genS');
+    res.render('genS', {schedule: schedule});
 });
 app.get('/createAccount', function (req, res) {
     res.render('eAC');
