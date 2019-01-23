@@ -109,12 +109,6 @@ app.get('/createAccount', function (req, res) {
 });
 
 
-<<<<<<< HEAD
-// passport.authenticate('local', { failureRedirect: '/'}),
-=======
-
->>>>>>> master
-
 //This is for testing locally
 function run() {
     app.listen(3000);
