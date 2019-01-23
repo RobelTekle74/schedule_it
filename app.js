@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+const bcrypt = require('bcryptjs');
+const models = require('./models');
+
 
 //We need this to go back and forth from the website, I think
 const bodyParser = require('body-parser');
@@ -30,9 +33,9 @@ app.get('/owner', function(req, res) {
 app.get('/employee', function (req, res) {
     res.render('eDash');
 });
-app.get('/generateSchedule', function (req, res) {
-    res.render('genS');
-});
+// app.get('/generateSchedule', function (req, res) {
+//     res.render('genS');
+// });
 app.get('/createAccount', function (req, res) {
     res.render('eAC');
 });
@@ -102,14 +105,49 @@ app.get('/owner', passport.authenticate('local', { failureRedirect: '/home'}), f
 app.get('/employee', passport.authenticate('local', { failureRedirect: '/home'}), function (req, res) {
     res.render('eDash');
 });
-app.get('/generateSchedule', function (req, res) {
-    res.render('genS');
-});
+// app.get('/generateSchedule', function (req, res) {
+//     res.render('genS');
+// });
 app.get('/createAccount', function (req, res) {
     res.render('eAC');
 });
 
+app.post('/createEmployeeAcct', function(req,res,next) {
+    console.log(req.body)
+    var hashedPassword = bcrypt.hashSync(req.body.password, 10);
+  
+    models.user.create({role: "employee", name: `${req.body.name}`, email: `${req.body.email}`, password: `${hashedPassword}`, phone: `${req.body.phone}`})
+      .then(function (user) {
+      console.log(user);
+  }).catch(e => {
+    console.log(e)
+  })
+})
+  
+app.post('/generateSchedule', function (req,res,next) {
+    var id = req.body.cell1
+    var m = req.body.cell2
+    var tu = req.body.cell3
+    var w = req.body.cell4
+    var thu = req.body.cell5
+    var f = req.body.cell6
+    var sa = req.body.cell7
+    var su = req.body.cell8
 
+    models.schedule.create({id: id, monday: m, tuesday: tu, wednesday: w, thursday: thu, friday: f, saturday: sa, sunday: su})
+    .then(function (schedule) {
+      res.redirect('/generateSchedule')
+    }).catch(function(err) {
+        console.log(err)
+    });
+  })
+
+  app.get('/generateSchedule', function(req, res) {
+      models.schedule.findAll({}).then((res) => {
+          console.log("I am the list of schedules", res)
+      })
+      res.render('genS')
+  })
 
 
 //This is for testing locally
