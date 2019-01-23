@@ -47,7 +47,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 
-app.use(session({secret: 'robeltakesgirlbaths'}));
+app.use(session({secret: 'schedule-it'}));
 
 passport.use(new LocalStrategy({usernameField: 'email'}, function(email, password, done) {
     db.one(`SELECT * FROM user WHERE email = '${email}'`)
@@ -85,20 +85,20 @@ passport.deserializeUser(function(cookie, done) {
 });
 
 
-// //page routes
-// app.get('/', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
-//     if(result.role = 'owner') {
-//         res.redirect('/owner_page/ownerDashboard.html');
-//     } else {
-//         res.redirect('/employee_page/employeeP.html');
-//     }
-// })
+//sign in routes
+app.get('/signIn', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
+    if(result.role = 'owner') {
+        res.redirect('/owner');
+    } else {
+        res.redirect('/employee');
+    }
+})
 
 app.get('/home', function (req, res) {
     res.render('home');
 });
 
-app.get('/owner', passport.authenticate('local', { failureRedirect: '/home'}), function(req, res) {  
+app.get('/owner', /* passport.authenticate('local', { failureRedirect: '/home'}), */ function(req, res) {  
     res.render('oDash');
 });
 
