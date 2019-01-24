@@ -1,16 +1,15 @@
 const express = require('express');
 const app = express();
-const schedule = require('db.schedule_it');
-
+const bcrypt = require('bcryptjs');
+const models = require('./models');
 
 app.use(express.static(__dirname + '/public'));
 
-//We need this to go back and forth from the website, I think
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//This part is if we want to use EJS for the html
+//EJS for the html
 const path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -60,37 +59,67 @@ passport.deserializeUser(function(cookie, done) {
 });
 
 
-//sign in routes
-app.get('/signIn', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
+//routes
+app.post('/signIn', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
     if(result.role = 'owner') {
         res.redirect('/owner');
     } else {
         res.redirect('/employee');
     }
-})
+});
 
-app.get('/home', function (req, res) {
+app.get('/', function (req, res) {
     res.render('home');
 });
 
-app.get('/owner', /* passport.authenticate('local', { failureRedirect: '/home'}), */ function(req, res) {  
+app.get('/owner', /*passport.authenticate('local', { failureRedirect: '/'}),*/ function(req, res) {  
     res.render('oDash');
 });
 
-app.get('/employee', passport.authenticate('local', { failureRedirect: '/home'}), function (req, res) {
+app.get('/employee', passport.authenticate('local', { failureRedirect: '/'}), function (req, res) {
     res.render('eDash');
 });
+
 app.get('/generateSchedule', function (req, res) {
-    res.render('genS', {schedule: schedule});
+    res.render('genS');
 });
+
 app.get('/createAccount', function (req, res) {
     res.render('eAC');
 });
 
+app.post('/generateSchedule', function (req,res,next) {
+    var id = req.body.cell1
+    var m = req.body.cell2
+    var tu = req.body.cell3
+    var w = req.body.cell4
+    var thu = req.body.cell5
+    var f = req.body.cell6
+    var sa = req.body.cell7
+    var su = req.body.cell8
+
+    models.schedule.create({id: id, monday: m, tuesday: tu, wednesday: w, thursday: thu, friday: f, saturday: sa, sunday: su})
+    .then(function (schedule) {
+      res.redirect('/generateSchedule')
+    }).catch(function(err) {
+        console.log(err)
+    });
+});
+
+app.post('/createEmployeeAcct', function(req, res) {
+    var hashedPassowrd = bcrypt.hashSync(req.body.password, 10);
+
+    models.user.create({role: 'owner', name: `${req.body.name}`, email: `${req.body.email}`, password: hashedPassowrd, phone: `${req.body.phone}`})
+      .then(function (user) {
+          res.redirect('/createAccount');
+      }).catch(e => {
+          console.log(e);
+      });
+});
 
 
 
-//This is for testing locally
+
 function run() {
     app.listen(3000);
     console.log('Listening on port 3000');

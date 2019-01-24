@@ -8,7 +8,7 @@
 
         <nav class="navbar navbar-expand-lg sticky-top navbar-light">
 
-            <a class="navbar-brand" href="/home">Schedule It</a>
+            <a class="navbar-brand" href="/">Schedule It</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -19,7 +19,7 @@
                 <ul class="navbar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/home">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
 
                 <li class="nav-item active">
@@ -27,7 +27,7 @@
                 </li>
                 
                 <li>
-                    <button class="btn btn-outline-success btn-sm p-0"><a class="nav-link text-success" href="/home">Sign Out</a></button>
+                    <button class="btn btn-outline-success btn-sm p-0"><a class="nav-link text-success" href="/logout">Sign Out</a></button>
                 </li>
                 </ul>
             </div>
@@ -37,35 +37,8 @@
             <% include Templates/uInfo.ejs %>
         </div>
             
-        <div class="table-responsive pt-5">
-            <table class="table table-striped">
-                <thead>
-                    <tr class="table-header">
-                        <th scope="col">Employee #</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Monday</th>
-                        <th scope="col">Tuesday</th>
-                        <th scope="col">Wednsday</th>
-                        <th scope="col">Thursday</th>
-                        <th scope="col">Friday</th>
-                        <th scope="col">Saturday</th>
-                        <th scope="col">Sunday</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div>
+            <% include Templates/table.ejs %>
         </div>
 
     </div>
