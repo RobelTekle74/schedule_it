@@ -8,10 +8,11 @@ module.exports = (sequelize, DataTypes) => {
     thursday: DataTypes.TIME,
     friday: DataTypes.TIME,
     saturday: DataTypes.TIME,
-    sunday: DataTypes.TIME
+    sunday: DataTypes.TIME,
   }, {});
   schedule.associate = function(models) {
     // associations can be defined here
+    schedule.belongsTo(models.user)
   };
   return schedule;
 };

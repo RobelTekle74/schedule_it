@@ -1,26 +1,27 @@
-<div class="table-responsive pt-5">
-        <table>
-            <tr class="table-header">
-                <th scope="col">Employee #</th>
-                <th scope="col">Monday</th>
-                <th scope="col">Tuesday</th>
-                <th scope="col">Wednsday</th>
-                <th scope="col">Thursday</th>
-                <th scope="col">Friday</th>
-                <th scope="col">Saturday</th>
-                <th scope="col">Sunday</th>
+
+<div class="table-responsive">
+        <table class="m-auto">
+            <tr class="table-header ">
+                <th class="pr-5 pb-2" scope="col">EmployeeID</th>
+                <th class="pr-5 pb-2" scope="col">Monday</th>
+                <th class="pr-5 pb-2" scope="col">Tuesday</th>
+                <th class="pr-5 pb-2" scope="col">Wednesday</th>
+                <th class="pr-5 pb-2" scope="col">Thursday</th>
+                <th class="pr-5 pb-2" scope="col">Friday</th>
+                <th class="pr-5 pb-2" scope="col">Saturday</th>
+                <th class="pr-5 pb-2" scope="col">Sunday</th>
             </tr>
             
-            <% schedules.forEach(function(schedule) { %>
-                <tr>
-                    <td><%= schedule.id %></td>
-                    <td><%= schedule.Monday %></td>
-                    <td><%= schedule.Tuesday %></td>
-                    <td><%= schedule.Wednsday %></td>
-                    <td><%= schedule.Thursday %></td>
-                    <td><%= schedule.Friday %></td>
-                    <td><%= schedule.Saturday %></td>
-                    <td><%= schedule.Sunday %></td>
+            <% schedules.forEach(function(schedule){ %>
+                <tr>           
+                    <td><%= schedule.id %></td>              
+                    <td><%= schedule.monday %></td>
+                    <td><%= schedule.tuesday %></td>
+                    <td><%= schedule.wednesday %></td>
+                    <td><%= schedule.thursday %></td>
+                    <td><%= schedule.friday %></td>
+                    <td><%= schedule.saturday %></td>
+                    <td><%= schedule.sunday %></td>
                 </tr>    
             <% }) %>
         </table>
