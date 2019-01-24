@@ -3,43 +3,16 @@ const app = express();
 const bcrypt = require('bcryptjs');
 const models = require('./models');
 
-
 //We need this to go back and forth from the website, I think
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
 
 //This part is if we want to use EJS for the html
 const path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-//bcrypt
-// const bcrypt = require('bcrypt');
-
-// app.post('/owner_page/createEmployeeAcct.html', function(req, res, next) {
-//     var hashedPassword = bcrypt.hashSync(req.body.password, 10);
-//     db.query(`INSERT INTO user (email, password, *) VALUES ('${req.body.email}', '${hashedPassword}', '*')`);
-// });
-
-app.get('/home', function (req, res) {
-    res.render('home');
-});
-
-app.get('/owner', function(req, res) {  
-    res.render('oDash');
-});
-
-app.get('/employee', function (req, res) {
-    res.render('eDash');
-});
-// app.get('/generateSchedule', function (req, res) {
-//     res.render('genS');
-// });
-app.get('/createAccount', function (req, res) {
-    res.render('eAC');
-});
-
 
 
 //passport
@@ -86,7 +59,7 @@ passport.deserializeUser(function(cookie, done) {
 
 
 //sign in routes
-app.get('/signIn', passport.authenticate('local', { failureRedirect: '/home'}), function(req, res) {
+app.get('/signIn', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
     if(result.role = 'owner') {
         res.redirect('/owner');
     } else {
@@ -94,27 +67,29 @@ app.get('/signIn', passport.authenticate('local', { failureRedirect: '/home'}), 
     }
 })
 
-app.get('/home', function (req, res) {
+app.get('/', function (req, res) {
     res.render('home');
 });
 
-app.get('/owner', passport.authenticate('local', { failureRedirect: '/home'}), function(req, res) {  
+app.get('/owner', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {  
     res.render('oDash');
 });
 
-app.get('/employee', passport.authenticate('local', { failureRedirect: '/home'}), function (req, res) {
+app.get('/employee', passport.authenticate('local', { failureRedirect: '/'}), function (req, res) {
     res.render('eDash');
 });
 
-app.get('/createAccount', function (req, res) {
-    res.render('eAC');
+app.get('/createAccount', async function (req, res) {
+    const user = await models.user.findAll({});
+    res.render('eAC', {users: user})
+    res.end()
 });
 
 app.post('/createEmployeeAcct', function(req,res,next) {
     console.log(req.body)
     var hashedPassword = bcrypt.hashSync(req.body.password, 10);
     
-    models.user.create({role: `${req.body.role}`, name: `${req.body.name}`, email: `${req.body.email}`, password: hashedPassword, phone: `${req.body.phone}`})
+    models.user.create({role: 'employee', name: `${req.body.name}`, email: `${req.body.email}`, password: hashedPassword, phone: `${req.body.phone}`})
       .then(function (user) {
         res.redirect('/createAccount')
   }).catch(e => {
@@ -132,7 +107,7 @@ app.post('/generateSchedule', function (req,res,next) {
     var sa = req.body.cell7
     var su = req.body.cell8
 
-    models.schedule.create({id: id, monday: m, tuesday: tu, wednesday: w, thursday: thu, friday: f, saturday: sa, sunday: su})
+    models.schedule.create({userid: id, monday: m, tuesday: tu, wednesday: w, thursday: thu, friday: f, saturday: sa, sunday: su})
     .then(function (schedule) {
       res.redirect('/generateSchedule')
     }).catch(function(err) {
@@ -140,13 +115,18 @@ app.post('/generateSchedule', function (req,res,next) {
     });
   })
 
-  app.get('/generateSchedule', function(req, res) {
-      models.schedule.findAll({}).then((res) => {
-          console.log("I am the list of schedules", res)
-      })
-      res.render('genS')
+  app.get('/generateSchedule', async function(req, res) {
+      const schedule = await models.schedule.findAll({});
+      const user = await models.user.findAll({});
+      res.render('genS', {schedules: schedule, users: user})
+      res.end()
+      
   })
 
+  app.get('/logout', function(req,res) {
+      req.logout();
+      res.redirect('/');
+  })
 
 //This is for testing locally
 function run() {

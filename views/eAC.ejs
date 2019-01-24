@@ -43,7 +43,7 @@
 
                     <li>
 
-                        <button><a class="nav-link" href="/home">Sign Out</a></button>
+                        <button><a class="nav-link" href="/logout">Sign Out</a></button>
                         
                     </li>
 
@@ -54,10 +54,9 @@
         </nav>
     <form method="POST" action="/createEmployeeAcct">
         <div class=" mx-auto p-5" id="CEAInput">
-            <input name="role" type="text" class="form-control text-center" id="role" placeholder="Role">
             <input name="name" type="text" class="form-control text-center" id="name" placeholder="Employee Full Name">
             <input name="email" type="tex" class="form-control text-center" id="email" placeholder="Employee Email">
-            <input name="password" type="text" class="form-control text-center" id="password" placeholder="Password">
+            <input type="password" name="password" type="text" class="form-control text-center" id="password" placeholder="Password">
             <input name="phone" type="text" class="form-control text-center" id="phone" placeholder="Phone Number">
             <div class="input-group-prepend d-flex justify-content-end" id="button-addon3">
                 <button class="btn btn-success" id="submit" type="submit">Add</button>
@@ -67,8 +66,14 @@
     </form>
     </div>
     
+    <div>
+        <% include Templates/uInfo.ejs %>
+    </div>
     
-    <% include Templates/footer.ejs %>
+    <div>
+        <% include Templates/footer.ejs %>
+    </div>
+   
     
 </body>
 </html>

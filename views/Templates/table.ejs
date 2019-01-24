@@ -2,26 +2,26 @@
         <table>
             <tr class="table-header">
                 <th scope="col">Employee #</th>
-                <th scope="col">Name</th>
                 <th scope="col">Monday</th>
                 <th scope="col">Tuesday</th>
-                <th scope="col">Wednsday</th>
+                <th scope="col">Wednesday</th>
                 <th scope="col">Thursday</th>
                 <th scope="col">Friday</th>
                 <th scope="col">Saturday</th>
                 <th scope="col">Sunday</th>
             </tr>
             
-            <% for (var i = 0; i < schedule.length; i++) { %>
+            <% schedules.forEach(function(schedule){ %>
                 <tr>
-                    <td><%= schedule[i].Monday %></td>
-                    <td><%= schedule[i].Tuesday %></td>
-                    <td><%= schedule[i].Wednsday %></td>
-                    <td><%= schedule[i].Thursday %></td>
-                    <td><%= schedule[i].Friday %></td>
-                    <td><%= schedule[i].Saturday %></td>
-                    <td><%= schedule[i].Sunday %></td>
+                    <td><%= schedule.id %></td>              
+                    <td><%= schedule.monday %></td>
+                    <td><%= schedule.tuesday %></td>
+                    <td><%= schedule.wednesday %></td>
+                    <td><%= schedule.thursday %></td>
+                    <td><%= schedule.friday %></td>
+                    <td><%= schedule.saturday %></td>
+                    <td><%= schedule.sunday %></td>
                 </tr>    
-            <% } %>
+            <% }) %>
         </table>
 </div>
