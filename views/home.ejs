@@ -42,7 +42,15 @@
 
         <div class="input-group-prepend d-flex justify-content-center" id="button-addon3">
             
-            <form active="/" method="POST" action="/login">
+            <form class = "p-4" method="GET" action="/owner">
+                <h4>Owner Sign In</h4>
+                <input type="email" class="form-control text-nowrap" placeholder="Email Address">
+                <input type="password" class="form-control text-nowrap" placeholder="Password">
+                <button class="btn btn-success" type="sumbit">Sign In</button>
+            </form>
+
+            <form class = "p-4" method="GET" action="/employee">
+                <h4>Employee Sign In</h4>
                 <input type="email" class="form-control text-nowrap" placeholder="Email Address">
                 <input type="password" class="form-control text-nowrap" placeholder="Password">
                 <button class="btn btn-success" type="submit">Sign In</button>

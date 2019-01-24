@@ -3,13 +3,12 @@ const app = express();
 const bcrypt = require('bcryptjs');
 const models = require('./models');
 
-//We need this to go back and forth from the website, I think
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
-//This part is if we want to use EJS for the html
+//EJS for the html
 const path = require('path');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -135,7 +134,6 @@ app.post('/generateSchedule', function (req,res,next) {
       res.redirect('/');
   })
 
-//This is for testing locally
 function run() {
     app.listen(3000);
     console.log('Listening on port 3000');
