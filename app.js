@@ -59,8 +59,14 @@ passport.deserializeUser(function(cookie, done) {
 });
 
 
+
+
+app.get('/', function (req, res) {
+    res.render('home');
+});
+
 //sign in routes
-app.post('/login', /*passport.authenticate('local', { failureRedirect: '/'}),*/ function(req, res) {
+app.post('/login', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
     if(result.role = 'owner') {
         res.redirect('/owner');
     } else {
@@ -68,15 +74,11 @@ app.post('/login', /*passport.authenticate('local', { failureRedirect: '/'}),*/ 
     }
 })
 
-app.get('/', function (req, res) {
-    res.render('home');
-});
-
-app.get('/owner', /*passport.authenticate('local', { failureRedirect: '/'}),*/ function(req, res) {  
+app.get('/owner', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {  
     res.render('oDash');
 });
 
-app.get('/employee', /*passport.authenticate('local', { failureRedirect: '/'}),*/ async function(req, res) {
+app.get('/employee', passport.authenticate('local', { failureRedirect: '/'}), async function(req, res) {
     const schedule = await models.schedule.findAll({});
     const user = await models.user.findAll({});
     res.render('eDash', {schedules: schedule, users: user})
