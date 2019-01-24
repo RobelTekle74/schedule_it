@@ -23,7 +23,7 @@ const session = require('express-session');
 app.use(session({secret: 'schedule-it'}));
 
 passport.use(new LocalStrategy({usernameField: 'email'}, function(email, password, done) {
-    db.one(`SELECT * FROM user WHERE email = '${email}'`)
+    db.one(`SELECT * FROM users WHERE email = '${email}'`)
         .then(function(result) {
 
             let fetchedPassword = result.password;
@@ -32,6 +32,7 @@ passport.use(new LocalStrategy({usernameField: 'email'}, function(email, passwor
             if(isPasswordMatch) {
                 done(null, result);
             } else {
+                console.log('Invalid password')
                 done(null, false)
             };
         }).catch(function(err){
@@ -59,7 +60,7 @@ passport.deserializeUser(function(cookie, done) {
 
 
 //sign in routes
-app.get('/signIn', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
+app.post('/login', /*passport.authenticate('local', { failureRedirect: '/'}),*/ function(req, res) {
     if(result.role = 'owner') {
         res.redirect('/owner');
     } else {
@@ -71,12 +72,15 @@ app.get('/', function (req, res) {
     res.render('home');
 });
 
-app.get('/owner', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {  
+app.get('/owner', /*passport.authenticate('local', { failureRedirect: '/'}),*/ function(req, res) {  
     res.render('oDash');
 });
 
-app.get('/employee', passport.authenticate('local', { failureRedirect: '/'}), function (req, res) {
-    res.render('eDash');
+app.get('/employee', /*passport.authenticate('local', { failureRedirect: '/'}),*/ async function(req, res) {
+    const schedule = await models.schedule.findAll({});
+    const user = await models.user.findAll({});
+    res.render('eDash', {schedules: schedule, users: user})
+    res.end()
 });
 
 app.get('/createAccount', async function (req, res) {
@@ -122,6 +126,7 @@ app.post('/generateSchedule', function (req,res,next) {
       res.end()
       
   })
+
 
   app.get('/logout', function(req,res) {
       req.logout();
