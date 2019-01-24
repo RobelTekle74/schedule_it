@@ -43,7 +43,7 @@
 
                     <li>
 
-                        <button class="btn btn-outline-success btn-sm p-0"><a class="nav-link" href="/home">Sign Out</a></button>
+                        <button class="btn btn-outline-success btn-sm p-0"><a class="nav-link" href="/logout">Sign Out</a></button>
                         
                     </li>
 
@@ -52,26 +52,21 @@
             </div>
 
         </nav>
-
+    <form method="POST" action="/createEmployeeAcct">
         <div class=" mx-auto p-5" id="CEAInput">
-
-            <input type="text" class="form-control text-center" id="role" placeholder="Role">
-
-            <input type="text" class="form-control text-center" id="name" placeholder="Employee Full Name">
-
-            <input type="email" class="form-control text-center" id="emall" placeholder="Employee Email">
-
-            <input type="password" class="form-control text-center" id="passWord" placeholder="Password">
-
-            <input type="text" class="form-control text-center" id="phoneNumber" placeholder="Phone Number">
-
+            <input name="name" type="text" class="form-control text-center" id="name" placeholder="Employee Full Name">
+            <input name="email" type="tex" class="form-control text-center" id="email" placeholder="Employee Email">
+            <input type="password" name="password" type="text" class="form-control text-center" id="password" placeholder="Password">
+            <input name="phone" type="text" class="form-control text-center" id="phone" placeholder="Phone Number">
             <div class="input-group-prepend d-flex justify-content-end" id="button-addon3">
-
-                <button class="btn btn-success" id="submit" href="/createEmployeeAcct">Add</button>
-
+                <button class="btn btn-success" id="submit" type="submit">Add</button>
             </div>
 
         </div>
+        <div>
+                <% include Templates/uInfo.ejs %>
+        </div>
+    </form>
 
         <% users.forEach(function(user){ %> 
             <div id="userInfo">
@@ -83,9 +78,12 @@
         <% }) %>
 
     </div>
+
     
-    
-    <% include Templates/footer.ejs %>
+    <div>
+        <% include Templates/footer.ejs %>
+    </div>
+   
     
 </body>
 </html>

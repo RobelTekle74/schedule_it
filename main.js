@@ -6,6 +6,7 @@ const models = require('./models');
 app.set('view engine', 'ejs');
 app.set('views', 'app/views');
 
+function addUser() {
 
 app.post('/createEmployeeAcct', function(req,res,next) {
 
@@ -18,21 +19,20 @@ app.post('/createEmployeeAcct', function(req,res,next) {
   console.log(e)
 })
 })
-
+};
+addUser();
 
 app.post('/genSchedule', function (req,res,next) {
-
+  console.log(req.body)
   models.schedule.create({id: `${req.body.cell1}`, monday: `${req.body.cell2}`, tuesday: `${req.body.cell3}`, wednesday: `${req.body.cell4}`, thursday: `${req.body.cell5}`, friday: `${req.body.cell6}`, saturday: `${req.body.cell7}`, sunday: `${req.body.cell8}`})
   .then(function (schedule) {
     console.log(schedule);
   }).catch(err);
 })
 
-// app.get('/genS.ejs', function(req, res, next) {
-//   models.schedule.findAll().then(function() {
-    
-//   })
-// })
+models.schedule.findAll().then(schedule => {
+  console.log(schedule);
+});
 
 
 
