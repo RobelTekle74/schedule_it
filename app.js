@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const schedule = require('db.schedule_it');
+// const schedule = require('db.schedule_it');
 
 
 app.use(express.static(__dirname + '/public'));
@@ -61,7 +61,7 @@ passport.deserializeUser(function(cookie, done) {
 
 
 //sign in routes
-app.get('/signIn', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
+app.post('/signIn', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
     if(result.role = 'owner') {
         res.redirect('/owner');
     } else {
@@ -77,7 +77,7 @@ app.get('/owner', /* passport.authenticate('local', { failureRedirect: '/home'})
     res.render('oDash');
 });
 
-app.get('/employee', passport.authenticate('local', { failureRedirect: '/home'}), function (req, res) {
+app.get('/employee', /* passport.authenticate('local', { failureRedirect: '/home'}), */ function (req, res) {
     res.render('eDash');
 });
 app.get('/generateSchedule', function (req, res) {

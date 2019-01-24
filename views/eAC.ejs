@@ -43,7 +43,7 @@
 
                     <li>
 
-                        <button><a class="nav-link" href="/home">Sign Out</a></button>
+                        <button class="btn btn-outline-success btn-sm p-0"><a class="nav-link" href="/home">Sign Out</a></button>
                         
                     </li>
 
@@ -72,6 +72,15 @@
             </div>
 
         </div>
+
+        <% users.forEach(function(user){ %> 
+            <div id="userInfo">
+                <h1 class="d-flex justify-content-center"> <%= user.name %> </h1>
+                <h2 class="d-flex justify-content-center"> <%= user.id %> </h2>
+                <h2 class="d-flex justify-content-center"> <%= user.email %> </h2>
+                <h2 class="d-flex justify-content-center"> <%= user.phone %> </h2>
+            </div>
+        <% }) %>
 
     </div>
     
