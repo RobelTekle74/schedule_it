@@ -1,5 +1,5 @@
 <div class="table-responsive pt-5">
-        <table>
+        <table class="table table-striped">
             <tr class="table-header">
                 <th scope="col">Employee #</th>
                 <th scope="col">Name</th>
@@ -14,6 +14,7 @@
             
             <% for (var i = 0; i < schedule.length; i++) { %>
                 <tr>
+                    <td><%= schedule[i].id %></td>
                     <td><%= schedule[i].Monday %></td>
                     <td><%= schedule[i].Tuesday %></td>
                     <td><%= schedule[i].Wednsday %></td>
