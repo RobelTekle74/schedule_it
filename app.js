@@ -60,23 +60,23 @@ passport.deserializeUser(function(cookie, done) {
 
 
 //routes
-app.post('/signIn', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
-    if(result.role = 'owner') {
-        res.redirect('/owner');
-    } else {
-        res.redirect('/employee');
-    }
-});
+// app.post('/signIn', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
+//     if(result.role = 'owner') {
+//         res.redirect('/owner');
+//     } else {
+//         res.redirect('/employee');
+//     }
+// });
 
 app.get('/', function (req, res) {
     res.render('home');
 });
 
-app.get('/owner', /*passport.authenticate('local', { failureRedirect: '/'}),*/ function(req, res) {  
+app.get('/owner', function(req, res) {  
     res.render('oDash');
 });
 
-app.get('/employee', passport.authenticate('local', { failureRedirect: '/'}), function (req, res) {
+app.get('/employee', function (req, res) {
     res.render('eDash');
 });
 

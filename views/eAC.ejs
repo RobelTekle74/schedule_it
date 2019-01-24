@@ -52,26 +52,27 @@
             </div>
 
         </nav>
+        <form method= "POST" action="/createEmployeeAcct">
+            <div class=" mx-auto p-5" id="CEAInput">
 
-        <div class=" mx-auto p-5" id="CEAInput">
+                <input type="text" class="form-control text-center" id="role" placeholder="Role">
 
-            <input type="text" class="form-control text-center" id="role" placeholder="Role">
+                <input type="text" class="form-control text-center" id="name" placeholder="Employee Full Name">
 
-            <input type="text" class="form-control text-center" id="name" placeholder="Employee Full Name">
+                <input type="email" class="form-control text-center" id="emall" placeholder="Employee Email">
 
-            <input type="email" class="form-control text-center" id="emall" placeholder="Employee Email">
+                <input type="password" class="form-control text-center" id="passWord" placeholder="Password">
 
-            <input type="password" class="form-control text-center" id="passWord" placeholder="Password">
+                <input type="text" class="form-control text-center" id="phoneNumber" placeholder="Phone Number">
 
-            <input type="text" class="form-control text-center" id="phoneNumber" placeholder="Phone Number">
+                <div class="input-group-prepend d-flex justify-content-end" id="button-addon3">
 
-            <div class="input-group-prepend d-flex justify-content-end" id="button-addon3">
+                    <button class="btn btn-success" id="submit" type='submit'>Add</button>
 
-                <button class="btn btn-success" id="submit" href="/createEmployeeAcct">Add</button>
+                </div>
 
             </div>
-
-        </div>
+        </form>
 
     </div>
     
