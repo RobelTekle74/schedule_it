@@ -11,73 +11,18 @@ app.use(express.static(__dirname + '/public'));
 //EJS for the html
 const path = require('path');
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-
-//passport
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const session = require('express-session');
-
-app.use(session({secret: 'schedule-it'}));
-
-passport.use(new LocalStrategy({usernameField: 'email'}, function(email, password, done) {
-    db.one(`SELECT * FROM users WHERE email = '${email}'`)
-        .then(function(result) {
-
-            let fetchedPassword = result.password;
-            let isPasswordMatch = bcrypt.compareSync(password, fetchedPassword);
-
-            if(isPasswordMatch) {
-                done(null, result);
-            } else {
-                console.log('Invalid password')
-                done(null, false)
-            };
-        }).catch(function(err){
-                done(null, false);
-        });
-}));
-
-
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser(function(user, done) {
-    done(null, {
-        id: user.id,
-        email: user.email
-    });
-});
-
-passport.deserializeUser(function(cookie, done) {
-    db.query(`SELECT * FROM user WHERE id = '${cookie.id}'`).then(function(user) {
-        done(null, user);
-    });
-});
-
-
-
+app.set('view engine', 'ejs'); 
 
 app.get('/', function (req, res) {
     res.render('home');
 });
 
-//sign in routes
-app.post('/login', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {
-    if(result.role = 'owner') {
-        res.redirect('/owner');
-    } else {
-        res.redirect('/employee');
-    }
-})
-
-app.get('/owner', passport.authenticate('local', { failureRedirect: '/'}), function(req, res) {  
+//routes
+app.get('/owner', function(req, res) {  
     res.render('oDash');
 });
 
-app.get('/employee', passport.authenticate('local', { failureRedirect: '/'}), async function(req, res) {
+app.get('/employee', async function(req, res) {
     const schedule = await models.schedule.findAll({});
     const user = await models.user.findAll({});
     res.render('eDash', {schedules: schedule, users: user})
